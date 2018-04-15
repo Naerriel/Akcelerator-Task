@@ -5,7 +5,7 @@ class Transaction extends Component {
   constructor(props){
     super(props);
     this.state = {
-      hash: props.hash
+      json: props.json
     };
   }
   unmount = () => {
@@ -25,11 +25,24 @@ class Searching extends Component {
   constructor(props){
     super(props);
     this.state = {
-      hashValue: '0'
+      hashValue: '0',
+      txNotFound: false
     }
   }
   clickSearch = () => {
-    this.props.handleSearch(this.state.hashValue);
+    fetch(`https://api.blockcypher.com/v1/btc/main/txs/${this.state.hashValue}`)
+      .then(response => {
+        if(!response.ok){
+          throw Error();
+        }
+        return response.json();
+      })
+      .then(json => {
+        this.props.handleFindingTransaction(json);
+      })
+      .catch(() => {
+        this.setState({txNotFound: true});
+      });
   }
   handleTextAreaChange = (e) => {
     this.setState({hashValue: e.target.value});
@@ -38,8 +51,11 @@ class Searching extends Component {
     return (
       <div className="searchBox">
         <p>Search for transaction:</p>
-        <textarea onChange={this.handleTextAreaChange} placeholder="Transaction hash..."></textarea>
-        <button className="searchButton" onClick={this.clickSearch}>Search</button>
+        <textarea onChange={this.handleTextAreaChange}
+           placeholder="Transaction hash..."></textarea>
+        <button className="searchButton" onClick={this.clickSearch}>
+          Search</button>
+        {this.state.txNotFound ? <p>Transaction not found.</p> : null}
       </div>
     );
   }
@@ -50,14 +66,13 @@ class App extends Component {
     super(props);
     this.state = {
       renderSearch: true,
-      transactionHash: "0"
+      transactionJSON: []
     };
   }
-  handleSearch = (transactionHash) => {
-    console.log(transactionHash);
+  handleFindingTransaction = (transactionJSON) => {
     this.setState({
       renderSearch: false,
-      transactionHash: transactionHash
+      transactionJSON: transactionJSON
     });
   }
   unmountTransaction = () => {
@@ -70,11 +85,11 @@ class App extends Component {
       <div className="App">
         {this.state.renderSearch ?
           <Searching
-            handleSearch={this.handleSearch}
+            handleFindingTransaction={this.handleFindingTransaction}
           />
         :
           <Transaction
-            hash={this.state.transactionHash}
+            json={this.state.transactionJSON}
             unmount={this.unmountTransaction}
           />
         }
