@@ -1,4 +1,15 @@
 import React, { Component } from 'react';
+const kilo = 1000;
+
+const satoshiToBTC = (satoshiNum) => {
+  const satoshiInBTC = 1e8;
+  const BTCNum = satoshiNum / satoshiInBTC;
+  return BTCNum + " BTC";
+}
+
+const formatDate = (date) => {
+  return date.replace("T", " ").slice(0, -5);
+}
 
 class DataTable extends Component {
   constructor(props){
@@ -29,14 +40,15 @@ class Transaction extends Component {
     let inputs = [];
     let outputs = [];
     let totalInput = 0;
-    const feesRate = props.json.total / props.json.size;
+    const feesRate = satoshiToBTC(props.json.fees * kilo / props.json.size)
+      + "/KB";
 
     if(props.json.inputs[0].hasOwnProperty("addresses")){ //If BTC is created
       for(let inNr in props.json.inputs){
         const address = props.json.inputs[inNr].addresses[0];
         const value = props.json.inputs[inNr].output_value;
         inputs.push(<li><span className="left">{address}</span>
-          <span className="right">{value}</span></li>);
+          <span className="right">{satoshiToBTC(value)}</span></li>);
         totalInput += value;
       }
     }
@@ -49,21 +61,21 @@ class Transaction extends Component {
       else{
         address = "Unparsed address";
       }
-      const value = props.json.outputs[outNr].value;
+      const value = satoshiToBTC(props.json.outputs[outNr].value);
       outputs.push(<li><span className="left">{address}</span>
         <span className="right">{value}</span></li>);
     }
 
     const firstTable = [
-      ["Total value", props.json.total],
+      ["Total value", satoshiToBTC(props.json.total)],
       ["Confirmations:", props.json.confirmations],
       ["Block:", props.json.block_height],
-      ["Received:", props.json.received]]; // format this
+      ["Received:", formatDate(props.json.received)]]; // format this
     const secondTable = [
-      ["Total inputs:", totalInput],
-      ["Size:", props.json.size],
-      ["Fees:", props.json.fees],
-      ["Fees rate:", props.json.fees / (props.json.size / 1000)]];
+      ["Total inputs:", satoshiToBTC(totalInput)],
+      ["Size:", props.json.size + " (Bytes)"],
+      ["Fees:", satoshiToBTC(props.json.fees)],
+      ["Fees rate:", feesRate]];
 
     this.state = {
       hash: props.json.hash,
@@ -71,8 +83,8 @@ class Transaction extends Component {
       secondTable: secondTable,
       inputs: inputs,
       outputs: outputs,
-      totalInput: totalInput,
-      totalOutput: props.json.total
+      totalInput: satoshiToBTC(totalInput),
+      totalOutput: satoshiToBTC(props.json.total)
     };
   }
 
