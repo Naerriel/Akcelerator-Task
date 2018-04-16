@@ -1,25 +1,6 @@
 import React, { Component } from 'react';
+import Transaction from './Transaction'
 import './App.css';
-
-class Transaction extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      json: props.json
-    };
-  }
-  unmount = () => {
-    this.props.unmount();
-  }
-  render(){
-    return (
-      <div className="transaction">
-        <p>My hash is:{this.state.hash}</p>
-        <button onClick={this.unmount}>Go back</button>
-      </div>
-    );
-  }
-}
 
 class Searching extends Component {
   constructor(props){

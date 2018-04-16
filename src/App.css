@@ -1,20 +1,69 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .searchBox {
-  text-align: center;
-  margin: auto;
-  border: 1px solid green;
-  max-width: 960px;
+    text-align: center;
+    margin: auto;
+    border: 1px solid green;
+    max-width: 960px;
 }
 
 .searchBox textarea{
-  vertical-align: middle;
-  margin: 5px;
-  min-width: 300px;
+    vertical-align: middle;
+    margin: 5px;
+    min-width: 300px;
 }
 
 .searchButton {
-  vertical-align: middle;
+    vertical-align: middle;
+}
+
+table {
+    display: inline-block;
+    background-color: green;
+    color: white;
+    margin: 10px;
+}
+
+.backButton {
+    display: block;
+}
+
+.addresses__header{
+    display: inline-block;
+    margin: 20px;
+}
+
+.addresses{
+    background-color: azure;
+}
+
+.addresses-header{
+    background-color: violet;
+    min-width: 300px;
+}
+
+.addresses-header-title{
+    display: inline-block;
+    background-color: red;
+    min-width: 300px;
+    margin: 20px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+ul {
+    display: inline-block;
+}
+
+li {
+    background-color: brown;
+    min-width: 500px;
 }
