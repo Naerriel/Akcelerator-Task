@@ -1,6 +1,5 @@
 *{
     border-style: border-box;
-    font-family: "Roboto", sans-serif;
     margin: 0;
 }
 
@@ -69,17 +68,13 @@ button {
     width: 45%;
 }
 
-dd{
+.abstractTable dd{
     display: inline-block;
 }
 
-dt{
+.abstractTable dt{
     display: inline-block;
     float: right;
-}
-
-.backButton {
-    display: block;
 }
 
 .addresses__header{
@@ -93,7 +88,7 @@ dt{
     border-radius: 8px;
 }
 
-.addressess .details{
+.addresses .details{
     color: #888888;
 }
 
@@ -118,7 +113,7 @@ dt{
     float: right;
 }
 
-ul {
+.addresses ul {
     display: inline-block;
     vertical-align: top;
     width: 43%;
@@ -129,10 +124,11 @@ ul {
     font-weight: bold;
 }
 
-li {
+.addresses li {
     min-width: 480px;
 }
 
 .backButton {
+    display: block;
     margin: 60px auto;
 }
