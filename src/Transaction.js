@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { sha256 } from 'js-sha256';
 const kilo = 1000;
 
 const satoshiToBTC = (satoshiNum) => {
@@ -23,7 +24,8 @@ class DataTable extends Component {
     for(let rowNum in this.state.table){
       const description = this.state.table[rowNum][0];
       const value = this.state.table[rowNum][1];
-      rows.push(<dl><dd>{description}</dd><dt>{value}</dt></dl>);
+      rows.push(<dl key={sha256(description)}><dd>
+        {description}</dd><dt>{value}</dt></dl>);
     }
     return(
       <div className="abstractTable">{rows}</div>
@@ -71,13 +73,13 @@ class Transaction extends Component {
         const address = inputs[inNr].addresses[0];
         const value = inputs[inNr].output_value;
 
-        parsedInputs.push(<li><span className="left">{address}</span>
+        parsedInputs.push(<li key={sha256(address)}><span className="left">{address}</span>
           <span className="right">{satoshiToBTC(value)}</span></li>);
         this.totalInput += value;
       }
     }
     else{
-      parsedInputs.push(<li>
+      parsedInputs.push(<li key={sha256("No inputs")}>
         <span className="left">No inputs (new coins generated)</span></li>);
     }
     return parsedInputs;
@@ -95,8 +97,10 @@ class Transaction extends Component {
       }
       const value = satoshiToBTC(outputs[outNr].value);
 
-      parsedOutputs.push(<li><span className="left">{address}</span>
-        <span className="right">{value}</span></li>);
+      parsedOutputs.push(<li key={sha256(String(value + outNr))}>
+        <span className="left">{address}</span>
+        <span className="right">{value}</span>
+        </li>);
     }
     return parsedOutputs;
   }
