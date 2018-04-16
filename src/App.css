@@ -1,29 +1,75 @@
+*{
+    border-style: border-box;
+}
+
+body{
+    background-color: #E5E8EF;
+}
+
 .App {
-    text-align: center;
+    width: 1200px;
+    margin: auto;
 }
 
 .searchBox {
     text-align: center;
-    margin: auto;
-    border: 1px solid green;
-    max-width: 960px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
 }
 
 .searchBox textarea{
     vertical-align: middle;
     margin: 5px;
-    min-width: 300px;
+    min-width: 500px;
+    resize: none;
 }
 
-.searchButton {
+button {
+    border: none;
     vertical-align: middle;
+    background-color: #4473C2;
+    padding: 10px;
+    color: white;
+}
+
+.transaction{
+    border-radius: 8px;
+}
+
+.transactionHeader{
+    margin-top: 40px;
+    background-color: #F5F5F5;
+    padding: 10px 20px;
+}
+
+.header-message{
+    text-align: left;
+    font-weight: bold;
+}
+
+.transaction-hash{
+    float: right;
 }
 
 table {
     display: inline-block;
-    background-color: green;
-    color: white;
-    margin: 10px;
+    background-color: white;
+    padding: 10px;
+    min-width: 580px;
+}
+
+tr{
+    width: 100%;
+}
+
+td:first-child {
+    text-align: left;
+}
+
+td:last-child {
+    text-align: right;
 }
 
 .backButton {
@@ -36,18 +82,21 @@ table {
 }
 
 .addresses{
-    background-color: azure;
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
 }
 
 .addresses-header{
-    background-color: violet;
-    min-width: 300px;
+    margin-top: 30px;
+    background-color: #F5F5F5;
+    min-width: 450px;
+    border-radius: 8px 8px 0 0;
 }
 
 .addresses-header-title{
     display: inline-block;
-    background-color: red;
-    min-width: 300px;
+    width: 46%;
     margin: 20px;
 }
 
@@ -60,10 +109,20 @@ table {
 }
 
 ul {
+    /*list-style-type: none;*/
     display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+
+.nocoins{
+    font-weight: bold;
 }
 
 li {
-    background-color: brown;
-    min-width: 500px;
+    min-width: 530px;
+}
+
+.backButton {
+    margin: 60px auto;
 }

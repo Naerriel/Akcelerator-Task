@@ -52,6 +52,9 @@ class Transaction extends Component {
         totalInput += value;
       }
     }
+    else{
+      inputs.push(<li><span className="left nocoins">No inputs (new coins generated)</span></li>);
+    }
 
     for(let outNr in props.json.outputs){
       let address;
@@ -95,8 +98,10 @@ class Transaction extends Component {
   render(){
     return (
       <div className="transaction">
-        <p>Bitcoin Transaction:</p>
-        <p>{this.state.hash}</p>
+        <div className="transactionHeader">
+          <span className="header-message">Bitcoin Transaction:</span>
+          <span className="transaction-hash">{this.state.hash}</span>
+        </div>
         <DataTable table={this.state.firstTable}/>
         <DataTable table={this.state.secondTable} />
         <div className="addresses">
