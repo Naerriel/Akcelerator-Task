@@ -39,8 +39,8 @@ class Transaction extends Component {
   constructor(props){
     super(props);
 
-    const inputs = this._init_inputs(props.json.inputs);
-    const outputs = this._init_outputs(props.json.outputs);;
+    const inputs = this._parseInputs(props.json.inputs);
+    const outputs = this._parseOutputs(props.json.outputs);;
     const feesRate =
       satoshiToBTC(props.json.fees * kilo / props.json.size) + "/KB";
 
@@ -66,7 +66,7 @@ class Transaction extends Component {
     };
   }
 
-  _init_inputs = (inputs) => {
+  _parseInputs = (inputs) => {
     const parsedInputs = [];
     if(inputs[0].hasOwnProperty("addresses")){
       for(let inNr in inputs){
@@ -85,7 +85,7 @@ class Transaction extends Component {
     return parsedInputs;
   }
 
-  _init_outputs = (outputs) => {
+  _parseOutputs = (outputs) => {
     const parsedOutputs = [];
     for(let outNr in outputs){
       let address;
