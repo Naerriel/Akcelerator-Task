@@ -7,7 +7,7 @@ class Searching extends Component {
     super(props);
     this.state = {
       hashValue: '0',
-      txNotFound: false
+      transactionNotFound: false
     }
   }
   clickSearch = () => {
@@ -22,7 +22,7 @@ class Searching extends Component {
         this.props.handleFindingTransaction(json);
       })
       .catch(() => {
-        this.setState({txNotFound: true});
+        this.setState({transactionNotFound: true});
       });
   }
   handleTextAreaChange = (e) => {
@@ -36,7 +36,7 @@ class Searching extends Component {
            placeholder="Transaction hash..."></textarea>
         <button className="searchButton" onClick={this.clickSearch}>
           Search</button>
-        {this.state.txNotFound ? <p>Transaction not found.</p> : null}
+        {this.state.transactionNotFound ? <p>Transaction not found.</p> : null}
       </div>
     );
   }
@@ -58,7 +58,7 @@ class App extends Component {
   }
   unmountTransaction = () => {
     this.setState({
-      renderSearch: true,
+      renderSearch: true
     });
   }
   render() {

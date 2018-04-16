@@ -21,14 +21,12 @@ class DataTable extends Component {
   render(){
     let rows = [];
     for(let rowNum = 0; rowNum < this.state.table.length; rowNum++){
-      let thisRow = [];
-      for(let colNum = 0; colNum < this.state.table[rowNum].length; colNum++){
-        thisRow.push(<td>{this.state.table[rowNum][colNum]}</td>);
-      }
-      rows.push(<tr>{thisRow}</tr>);
+      const description = this.state.table[rowNum][0];
+      const value = this.state.table[rowNum][1];
+      rows.push(<dl><dd>{description}</dd><dt>{value}</dt></dl>);
     }
     return(
-      <table><tbody>{rows}</tbody></table>
+      <div className="abstractTable">{rows}</div>
     );
   }
 }
@@ -40,20 +38,21 @@ class Transaction extends Component {
     let inputs = [];
     let outputs = [];
     let totalInput = 0;
-    const feesRate = satoshiToBTC(props.json.fees * kilo / props.json.size)
-      + "/KB";
+    const feesRate =
+      satoshiToBTC(props.json.fees * kilo / props.json.size) + "/KB";
 
-    if(props.json.inputs[0].hasOwnProperty("addresses")){ //If BTC is created
+    if(props.json.inputs[0].hasOwnProperty("addresses")){
       for(let inNr in props.json.inputs){
         const address = props.json.inputs[inNr].addresses[0];
         const value = props.json.inputs[inNr].output_value;
+
         inputs.push(<li><span className="left">{address}</span>
           <span className="right">{satoshiToBTC(value)}</span></li>);
         totalInput += value;
       }
     }
     else{
-      inputs.push(<li><span className="left nocoins">No inputs (new coins generated)</span></li>);
+      inputs.push(<li><span className="left">No inputs (new coins generated)</span></li>);
     }
 
     for(let outNr in props.json.outputs){
@@ -65,6 +64,7 @@ class Transaction extends Component {
         address = "Unparsed address";
       }
       const value = satoshiToBTC(props.json.outputs[outNr].value);
+
       outputs.push(<li><span className="left">{address}</span>
         <span className="right">{value}</span></li>);
     }
@@ -73,7 +73,7 @@ class Transaction extends Component {
       ["Total value", satoshiToBTC(props.json.total)],
       ["Confirmations:", props.json.confirmations],
       ["Block:", props.json.block_height],
-      ["Received:", formatDate(props.json.received)]]; // format this
+      ["Received:", formatDate(props.json.received)]];
     const secondTable = [
       ["Total inputs:", satoshiToBTC(totalInput)],
       ["Size:", props.json.size + " (Bytes)"],
@@ -102,8 +102,10 @@ class Transaction extends Component {
           <span className="header-message">Bitcoin Transaction:</span>
           <span className="transaction-hash">{this.state.hash}</span>
         </div>
-        <DataTable table={this.state.firstTable}/>
-        <DataTable table={this.state.secondTable} />
+        <div className="details">
+          <DataTable table={this.state.firstTable}/>
+          <DataTable table={this.state.secondTable}/>
+        </div>
         <div className="addresses">
           <div className="addresses-header">
             <div className="addresses-header-title">
@@ -115,8 +117,10 @@ class Transaction extends Component {
               <span className="right">{this.state.totalOutput}</span>
             </div>
           </div>
-          <ul>{this.state.inputs}</ul>
-          <ul>{this.state.outputs}</ul>
+          <div className="addresses-body">
+            <ul>{this.state.inputs}</ul>
+            <ul>{this.state.outputs}</ul>
+          </div>
         </div>
         <button className="backButton" onClick={this.unmount}>Go back</button>
       </div>

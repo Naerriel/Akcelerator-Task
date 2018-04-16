@@ -1,5 +1,7 @@
 *{
     border-style: border-box;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
 }
 
 body{
@@ -42,6 +44,7 @@ button {
     margin-top: 40px;
     background-color: #F5F5F5;
     padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
 }
 
 .header-message{
@@ -53,23 +56,26 @@ button {
     float: right;
 }
 
-table {
+.details{
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+}
+
+.abstractTable {
     display: inline-block;
     background-color: white;
     padding: 10px;
-    min-width: 580px;
+    margin: 20px;
+    width: 45%;
 }
 
-tr{
-    width: 100%;
+dd{
+    display: inline-block;
 }
 
-td:first-child {
-    text-align: left;
-}
-
-td:last-child {
-    text-align: right;
+dt{
+    display: inline-block;
+    float: right;
 }
 
 .backButton {
@@ -85,6 +91,10 @@ td:last-child {
     text-align: center;
     background-color: white;
     border-radius: 8px;
+}
+
+.addressess .details{
+    color: #888888;
 }
 
 .addresses-header{
@@ -109,10 +119,10 @@ td:last-child {
 }
 
 ul {
-    /*list-style-type: none;*/
     display: inline-block;
     vertical-align: top;
-    margin: 10px;
+    width: 43%;
+    margin: 20px;
 }
 
 .nocoins{
@@ -120,7 +130,7 @@ ul {
 }
 
 li {
-    min-width: 530px;
+    min-width: 480px;
 }
 
 .backButton {
