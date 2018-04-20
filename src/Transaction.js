@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { sha256 } from 'js-sha256';
+import { Link } from 'react-router-dom';
 const kilo = 1000;
 
 const satoshiToBTC = (satoshiNum) => {
@@ -105,10 +106,6 @@ class Transaction extends Component {
     return parsedOutputs;
   }
 
-  unmount = () => {
-    this.props.unmount();
-  }
-
   render(){
     return (
       <div className="transaction">
@@ -136,7 +133,7 @@ class Transaction extends Component {
             <ul>{this.state.outputs}</ul>
           </div>
         </div>
-        <button className="backButton" onClick={this.unmount}>Go back</button>
+        <Link to="/"><button className="backButton">Go back</button></Link>
       </div>
     );
   }

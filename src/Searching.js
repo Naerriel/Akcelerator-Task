@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 class Searching extends Component {
   constructor(props){
@@ -8,35 +9,39 @@ class Searching extends Component {
       transactionNotFound: false
     }
   }
-  clickSearch = () => {
-    fetch(`https://api.blockcypher.com/v1/btc/main/txs/${this.state.hashValue}`)
-      .then(response => {
-        if(!response.ok){
-          throw Error();
-        }
-        return response.json();
-      })
-      .then(json => {
-        this.props.handleFindingTransaction(json);
-      })
-      .catch(() => {
-        this.setState({transactionNotFound: true});
-      });
+  _clickSearch = () => {
+    this.setState({
+      submitted: true
+    });
   }
-  handleTextAreaChange = (e) => {
+  _handleTextAreaChange = (e) => {
     this.setState({hashValue: e.target.value});
   }
+  _handleKeyPress = (e) => {
+    if(e.key === 'Enter'){
+      this.setState({
+        submitted: true
+      });
+    }
+  }
   render() {
-    return (
-      <div className="searchBox">
-        <p>Search for transaction:</p>
-        <textarea onChange={this.handleTextAreaChange}
-           placeholder="Transaction hash..."></textarea>
-        <button className="searchButton" onClick={this.clickSearch}>
-          Search</button>
-        {this.state.transactionNotFound ? <p>Transaction not found.</p> : null}
-      </div>
-    );
+    if(this.state.submitted){
+      return (
+        <Redirect to={`/transaction/${this.state.hashValue}`} />
+      )
+    }
+    else{
+      return (
+        <div className="searchBox">
+          <p>Search for transaction:</p>
+          <textarea onChange={this._handleTextAreaChange}
+              onKeyPress={this._handleKeyPress}
+             placeholder="Transaction hash..."></textarea>
+          <button className="searchButton" onClick={this._clickSearch}>
+            Search</button>
+        </div>
+      );
+    }
   }
 }
 

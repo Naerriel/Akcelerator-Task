@@ -113,6 +113,15 @@ button {
     float: right;
 }
 
+.notFound{
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
 .addresses ul {
     display: inline-block;
     vertical-align: top;
@@ -126,6 +135,10 @@ button {
 
 .addresses li {
     min-width: 480px;
+}
+
+.smallBackButton {
+    margin: 10px;
 }
 
 .backButton {

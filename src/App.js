@@ -1,41 +1,18 @@
 import React, { Component } from 'react';
-import Transaction from './Transaction'
+import GetTransaction from './GetTransaction'
 import Searching from './Searching'
 import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      renderSearch: true,
-      transactionJSON: []
-    };
-  }
-  handleFindingTransaction = (transactionJSON) => {
-    this.setState({
-      renderSearch: false,
-      transactionJSON: transactionJSON
-    });
-  }
-  unmountTransaction = () => {
-    this.setState({
-      renderSearch: true
-    });
-  }
   render() {
     return (
-      <div className="App">
-        {this.state.renderSearch ?
-          <Searching
-            handleFindingTransaction={this.handleFindingTransaction}
-          />
-        :
-          <Transaction
-            json={this.state.transactionJSON}
-            unmount={this.unmountTransaction}
-          />
-        }
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Route exact path="/" component={Searching} />
+          <Route path="/transaction/:hash" component={GetTransaction} />
+        </div>
+      </BrowserRouter>
     );
   }
 }
