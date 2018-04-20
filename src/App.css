@@ -20,11 +20,17 @@ body{
     padding: 10px;
 }
 
-.searchBox textarea{
+.searchMessage {
+    font-size: 1.5em;
+}
+
+.searchBox input{
     vertical-align: middle;
     margin: 5px;
-    min-width: 500px;
+    min-width: 600px;
     resize: none;
+    font-size: 1.1em;
+    height: 1.6em;
 }
 
 button {

@@ -33,10 +33,10 @@ class Searching extends Component {
     else{
       return (
         <div className="searchBox">
-          <p>Search for transaction:</p>
-          <textarea onChange={this._handleTextAreaChange}
-              onKeyPress={this._handleKeyPress}
-             placeholder="Transaction hash..."></textarea>
+          <p className="searchMessage">Search for transaction:</p>
+          <input onChange={this._handleTextAreaChange}
+            onKeyPress={this._handleKeyPress}
+            placeholder="Transaction hash..."></input>
           <button className="searchButton" onClick={this._clickSearch}>
             Search</button>
         </div>
