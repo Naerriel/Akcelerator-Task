@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GetTransaction from './GetTransaction'
 import Searching from './Searching'
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {

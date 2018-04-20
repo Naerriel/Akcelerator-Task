@@ -32,7 +32,6 @@ class GetTransaction extends Component {
           found: false,
           searched: true
         });
-        return(<p> No transaction found </p>);
       });
   }
 
@@ -53,9 +52,7 @@ class GetTransaction extends Component {
       else{
         return(
           <div className="searchBox">
-            <p className="notFound"> Transaction:</p>
-            <p className="notFound">"{this.state.hash}"</p>
-            <p className="notFound">is not found! </p>
+            <p className="notFound"> Transaction: "{this.state.hash}" is not found! </p>
             <Link to="/"><button className="smallBackButton">Go Back</button></Link>
           </div>
         );
