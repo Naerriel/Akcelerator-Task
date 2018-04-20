@@ -53,7 +53,7 @@ class GetTransaction extends Component {
         return(
           <div className="searchBox">
             <p className="notFound"> Transaction: "{this.state.hash}" is not found! </p>
-            <Link to="/"><button className="smallBackButton">Go Back</button></Link>
+            <Link to="/Akcelerator-Task/"><button className="smallBackButton">Go Back</button></Link>
           </div>
         );
       }

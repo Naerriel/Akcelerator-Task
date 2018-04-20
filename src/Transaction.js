@@ -133,7 +133,7 @@ class Transaction extends Component {
             <ul>{this.state.outputs}</ul>
           </div>
         </div>
-        <Link to="/"><button className="backButton">Go back</button></Link>
+        <Link to="/Akcelerator-Task/"><button className="backButton">Go back</button></Link>
       </div>
     );
   }

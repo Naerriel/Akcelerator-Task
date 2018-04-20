@@ -27,7 +27,7 @@ class Searching extends Component {
   render() {
     if(this.state.submitted){
       return (
-        <Redirect to={`/transaction/${this.state.hashValue}`} />
+        <Redirect to={`/Akcelerator-Task/transaction/${this.state.hashValue}`} />
       )
     }
     else{
