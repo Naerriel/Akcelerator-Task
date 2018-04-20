@@ -9,8 +9,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Route exact path="/" component={Searching} />
-          <Route path="/transaction/:hash" component={GetTransaction} />
+          <Route exact path="/Akcelerator-Task" component={Searching} />
+          <Route path="/Akcelerator-Task/transaction/:hash" component={GetTransaction} />
         </div>
       </BrowserRouter>
     );
